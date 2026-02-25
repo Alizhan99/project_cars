@@ -1,7 +1,7 @@
 package com.example.carcatalog.controller;
 
 import com.example.carcatalog.model.User;
-import com.example.carcatalog.service.UserService;
+import com.example.carcatalog.repository.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

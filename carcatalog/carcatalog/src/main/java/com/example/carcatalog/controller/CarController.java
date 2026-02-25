@@ -19,13 +19,13 @@ public class CarController {
     @Autowired
     private CarRepository carRepository;
 
-    // ✅ Получить все машины
+    //  Получить все машины
     @GetMapping
     public List<Car> getAllCars() {
         return carRepository.findAll();
     }
 
-    // ✅ Получить машину по ID
+    //  Получить машину по ID
     @GetMapping("/{id}")
     public ResponseEntity<Car> getCarById(@PathVariable Long id) {
         Optional<Car> car = carRepository.findById(id);
@@ -33,14 +33,14 @@ public class CarController {
                   .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // ✅ Добавить машину (для админки)
+    // Добавить машину (для админки)
     @PostMapping
     public ResponseEntity<Car> addCar(@RequestBody Car car) {
         Car savedCar = carRepository.save(car);
         return ResponseEntity.ok(savedCar);
     }
 
-    // ✅ Обновить машину (для админки)
+    //  Обновить машину (для админки)
     @PutMapping("/{id}")
     public ResponseEntity<Car> updateCar(@PathVariable Long id, @RequestBody Car carDetails) {
         Optional<Car> carOpt = carRepository.findById(id);
@@ -65,7 +65,7 @@ public class CarController {
         return ResponseEntity.ok(updatedCar);
     }
 
-    // ✅ Удалить машину (для админки)
+    // Удалить машину (для админки)
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCar(@PathVariable Long id) {
         if (!carRepository.existsById(id)) {
@@ -76,7 +76,7 @@ public class CarController {
         return ResponseEntity.noContent().build();
     }
 
-    // ✅ УЛУЧШЕННЫЙ ПОИСК С ФИЛЬТРАЦИЕЙ И СОРТИРОВКОЙ
+    //  УЛУЧШЕННЫЙ ПОИСК С ФИЛЬТРАЦИЕЙ И СОРТИРОВКОЙ
     @GetMapping("/search")
     public List<Car> searchCars(
             @RequestParam(required = false) String search,
@@ -126,7 +126,7 @@ public class CarController {
         return filteredCars;
     }
 
-    // ✅ ПОЛУЧИТЬ УНИКАЛЬНЫЕ БРЕНДЫ
+    //  ПОЛУЧИТЬ УНИКАЛЬНЫЕ БРЕНДЫ
     @GetMapping("/brands")
     public List<String> getBrands() {
         List<String> brands = carRepository.findAll().stream()
@@ -139,7 +139,7 @@ public class CarController {
         return brands;
     }
 
-    // ✅ ВСПОМОГАТЕЛЬНЫЙ МЕТОД ДЛЯ СОРТИРОВКИ
+    //  ВСПОМОГАТЕЛЬНЫЙ МЕТОД ДЛЯ СОРТИРОВКИ
     private List<Car> sortCars(List<Car> cars, String sortBy, String sortOrder) {
         boolean ascending = !"desc".equalsIgnoreCase(sortOrder);
         

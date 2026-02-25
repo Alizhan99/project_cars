@@ -1,4 +1,4 @@
-package com.example.carcatalog.service;
+package com.example.carcatalog.repository;
 
 import com.example.carcatalog.model.User;
 import com.example.carcatalog.repository.UserRepository;
@@ -23,38 +23,30 @@ public class UserService {
         if (userRepository.existsByEmail(user.getEmail())) {
             return "Email already registered";
         }
-
-        
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return "User registered successfully";
     }
 
-    
     public Optional<User> loginUserByEmail(String email, String rawPassword) {
-        Optional<User> userOpt = userRepository.findByEmail(email);
-        
-        if (userOpt.isPresent()) {
-            User user = userOpt.get();
-            
-            if (passwordEncoder.matches(rawPassword, user.getPassword())) {
-                return Optional.of(user);
-            }
-        }
-        return Optional.empty();
+        return userRepository.findByEmail(email)
+                .filter(user -> passwordEncoder.matches(rawPassword, user.getPassword()));
     }
 
-    
     public Optional<User> loginUser(String username, String rawPassword) {
-        Optional<User> userOpt = userRepository.findByUsername(username);
-        
-        if (userOpt.isPresent()) {
-            User user = userOpt.get();
-            
-            if (passwordEncoder.matches(rawPassword, user.getPassword())) {
-                return Optional.of(user);
+        return userRepository.findByUsername(username)
+                .filter(user -> passwordEncoder.matches(rawPassword, user.getPassword()));
+    }
+
+    // Метод для смены пароля
+    public boolean changePassword(Long userId, String oldPassword, String newPassword) {
+        return userRepository.findById(userId).map(user -> {
+            if (passwordEncoder.matches(oldPassword, user.getPassword())) {
+                user.setPassword(passwordEncoder.encode(newPassword));
+                userRepository.save(user);
+                return true;
             }
-        }
-        return Optional.empty();
+            return false;
+        }).orElse(false);
     }
 }

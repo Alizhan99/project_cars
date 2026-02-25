@@ -14,7 +14,7 @@ public class Car {
     private int year;
     private double price;
     
-    // ✅ Новые поля для детализации
+    // Новые поля для детализации
     @Column(length = 1000)
     private String imageUrl;
     
