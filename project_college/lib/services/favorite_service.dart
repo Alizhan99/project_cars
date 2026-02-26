@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/car.dart';
 
 class FavoriteService {
-  final String baseUrl = 'http://10.239.33.149:8080/api/favorites';
+  final String baseUrl = 'http://localhost:8080/api/favorites';
 
   // Получить избранные машины пользователя
   Future<List<Car>> getUserFavorites(int userId) async {

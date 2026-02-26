@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/car.dart';
 
 class ApiService {
-  final String baseUrl = 'http://10.239.33.149:8080/api';
+  final String baseUrl = 'http://localhost:8080/api';
 
   Future<List<Car>> fetchCars() async {
     try {

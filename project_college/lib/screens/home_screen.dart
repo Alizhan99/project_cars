@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _checkLoginStatus() async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
-    final userId = prefs.getInt('user_id');
+    final userId = prefs.getInt('id');
     final isAdmin = prefs.getBool('isAdmin') ?? false;
 
     setState(() {

@@ -27,7 +27,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
 
   Future<void> _loadFavorites() async {
     final prefs = await SharedPreferences.getInstance();
-    _userId = prefs.getInt('user_id');
+    _userId = prefs.getInt('id');
 
     if (_userId == null) {
       setState(() {

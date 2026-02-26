@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import '../models/car.dart';
 
 class AdminService {
-  final String baseUrl = 'http://10.239.33.149:8080/api/cars';
+  final String baseUrl = 'http://localhost:8080/api/cars';
 
   // Создать новую машину
   Future<Car?> createCar(Car car) async {
